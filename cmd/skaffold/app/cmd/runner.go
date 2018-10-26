@@ -38,6 +38,12 @@ func newRunner(opts *config.SkaffoldOptions) (*runner.SkaffoldRunner, *latest.Sk
 	}
 
 	config := parsed.(*latest.SkaffoldPipeline)
+
+	err = schema.SelectCluster(config, opts.Clusters)
+	if err != nil {
+		return nil, nil, errors.Wrap(err, "Select Cluster")
+	}
+
 	err = schema.ApplyProfiles(config, opts.Profiles)
 	if err != nil {
 		return nil, nil, errors.Wrap(err, "applying profiles")

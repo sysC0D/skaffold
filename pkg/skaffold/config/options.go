@@ -30,6 +30,7 @@ type SkaffoldOptions struct {
 	TailDev           bool
 	PortForward       bool
 	Profiles          []string
+	Clusters          []string
 	CustomTag         string
 	Namespace         string
 	Watch             []string

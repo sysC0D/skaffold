@@ -33,10 +33,11 @@ type SkaffoldPipeline struct {
 	APIVersion string `yaml:"apiVersion"`
 	Kind       string `yaml:"kind"`
 
-	Build    BuildConfig  `yaml:"build,omitempty"`
-	Test     []*TestCase  `yaml:"test,omitempty"`
-	Deploy   DeployConfig `yaml:"deploy,omitempty"`
-	Profiles []Profile    `yaml:"profiles,omitempty"`
+	Build         BuildConfig     `yaml:"build,omitempty"`
+	Test          []*TestCase     `yaml:"test,omitempty"`
+	Deploy        DeployConfig    `yaml:"deploy,omitempty"`
+	Profiles      []Profile       `yaml:"profiles,omitempty"`
+	MultiClusters []ClusterConfig `yaml:"multiclusters,omitempty"`
 }
 
 func (c *SkaffoldPipeline) GetVersion() string {
@@ -239,6 +240,14 @@ type Profile struct {
 	Build  BuildConfig  `yaml:"build,omitempty"`
 	Test   []*TestCase  `yaml:"test,omitempty"`
 	Deploy DeployConfig `yaml:"deploy,omitempty"`
+}
+
+// Profile is additional configuration that overrides default
+// configuration when it is activated.
+type ClusterConfig struct {
+	Name    string `yaml:"name,omitempty"`
+	Project string `yaml:"project,omitempty"`
+	Zone    string `yaml:"zone,omitempty"`
 }
 
 type ArtifactType struct {
